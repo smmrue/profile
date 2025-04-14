@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>구글 앱스 스크립트로 정보 전달</title>
+<style>/*폼 중앙 정렬 */
+    body {
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    fieldset {
+      margin-bottom: 1.5rem;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    legend {
+      font-weight: bold;
+      padding: 0 0.5rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+</style>
+
+        <script>
+            function submitForm(event) {
+            event.preventDefault();
+            const email = document.getElementById( "email" ).value;
+            const name = document.getElementById( "name" ).value;
+            const message = document.getElementById( "message" ).value;
+ 
+        fetch("뒤에서 배포된 Apps Script의 웹앱 URL을 여기에 입력한다. ", {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+                 },
+                body: `email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}&message=${encodeURIComponent(message)}`
+            }).then(response => {
+                alert("정보가 성공적으로 전송되었습니다!");
+            }).catch(error => {
+                alert("전송 실패: " + error.message);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <h2>정보 제출 폼</h2>
+    <form onsubmit="submitForm(event)">
+
+        <!--그룹핑 1-->
+        <fieldset>
+            <legend>기본 정보</legend>
+            <!--이메일-->
+            <label for="email">이메일:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+            <!--일반 텍스트 입력-->
+            <label for="name">이름:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <!--데이터 목록 사용-->
+            <label for="major">전공 선택</label>
+            <input list="majors" id="major" name="major" placeholder="전공 선택">
+            <datalist id="majors">
+            <option value="사이버보안학과">
+            <option value="소프트웨어학과">
+            <option value="디지털소프트웨어공학부">
+            <option value="기타">
+            </datalist>
+        </fieldset>
+
+        <fieldset><!--그룹핑 2-->
+            <legend>추가 정보</legend>
+
+            <!-- 체크박스 -->
+            <label>관심 분야 (중복 선택 가능)</label>
+            <input type="checkbox" id="web" name="interest" value="개발"> 개발
+            <input type="checkbox" id="security" name="interest" value="보안"> 보안
+            <input type="checkbox" id="ai" name="interest" value="AI"> AI
+
+            <!-- 라디오버튼 -->
+            <label>졸업 예정 여부</label>
+            <input type="radio" name="graduate" value="졸업 예정" checked> 졸업 예정
+            <input type="radio" name="graduate" value="졸업함"> 졸업함
+
+            <!-- 콤보박스 (select) -->
+            <label for="year">학년</label>
+            <select id="year" name="year">
+                <option value="">선택</option>
+                <option value="1학년">1학년</option>
+                <option value="2학년">2학년</option>
+                <option value="3학년">3학년</option>
+                <option value="4학년">4학년</option>
+            </select>
+
+        <!-- 여러 줄 텍스트 -->
+        <label for="feedback">하고 싶은 말</label>
+        <textarea id="feedback" name="feedback" rows="4" placeholder="전하고 싶은 말을 자유롭게 작성해 주세요."></textarea>
+      </fieldset>
+        
+        <button type="submit">제출</button>
+    </form>
+</body>
+</html>
