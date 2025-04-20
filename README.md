@@ -1,8 +1,3 @@
-
- 포트폴리오 메인 페이지 : [https://smmrue.github.io/profile/]
-
- 웹 폼 : [https://smmrue.github.io/profile/form.html]
-
 # 포트폴리오
 
 이 저장소는 인터넷 기초[04] 수업의 중간 과제로 제출한 포트폴리오입니다.
